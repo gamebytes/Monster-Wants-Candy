@@ -1,0 +1,26 @@
+{
+    "version": "0.5",
+    "name": "Monster Wants Candy",
+    "description": "It's simple, yet very engaging game about Monster who Wants Candy.",
+    "launch_path": "index.html",
+    "icons": {
+        "16": "/icons/icon16.png",
+        "30": "/icons/icon30.png",
+        "32": "/icons/icon32.png",
+        "48": "/icons/icon48.png",
+        "60": "/icons/icon60.png",
+        "64": "/icons/icon64.png",
+        "128": "/icons/icon128.png",
+        "256": "/icons/icon256.png"
+    },
+    "developer": {
+        "name": "Enclave Games",
+        "url": "http://enclavegames.com"
+    },
+    "installs_allowed_from": ["*"],
+    "default_locale": "en",
+    "permissions": {},
+    "fullscreen": "true",
+    "type": "web",
+    "orientation": "portrait"
+}

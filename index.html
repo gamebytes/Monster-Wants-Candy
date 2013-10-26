@@ -3,8 +3,8 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>Monster Wants Candy</title>
-	<style> body { margin: 0; } </style>
-	<script src="src/phaser.js"></script>
+	<style> body { margin: 0; background: #B4D9E7; } </style>
+	<script src="src/phaser.min.js"></script>
 	<script src="src/Boot.js"></script>
 	<script src="src/Preloader.js"></script>
 	<script src="src/MainMenu.js"></script>
@@ -13,7 +13,7 @@
 <body>
 <script type="text/javascript">
 (function () {
-	var game = new Phaser.Game(640, 960, Phaser.AUTO, 'game');
+	var game = new Phaser.Game(640, 960, Phaser.CANVAS, 'game');
 	game.state.add('Boot', Candy.Boot);
 	game.state.add('Preloader', Candy.Preloader);
 	game.state.add('MainMenu', Candy.MainMenu);
