@@ -15,19 +15,15 @@ Candy.Preloader.prototype = {
 		this.load.image('title', 'img/title.png');
 		this.load.image('game-over', 'img/gameover.png');
 
-		this.load.image('candy1', 'img/candy1.png');
-		this.load.image('candy2', 'img/candy2.png');
-		this.load.image('candy3', 'img/candy3.png');
-		this.load.image('candy4', 'img/candy4.png');
-		this.load.image('candy5', 'img/candy5.png');
+		this.load.spritesheet('candy', 'img/candy.png', 82, 98);
 
 		this.load.image('score-bg', 'img/score-bg.png');
 		this.load.image('highscore-text', 'img/highscore-text.png');
 
 		this.load.image('button-pause', 'img/button-pause.png');
 
-		this.load.image('button-blackmoon', 'img/logo-blackmoon.png');
-		this.load.image('button-enclave', 'img/logo-enclave.png');
+		this.load.image('button-blackmoon', 'img/button-blackmoon.png');
+		this.load.image('button-enclave', 'img/button-enclave.png');
 
 		this.load.image('screen-pause', 'img/screen-pause.png');
 

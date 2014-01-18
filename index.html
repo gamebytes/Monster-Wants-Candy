@@ -1,8 +1,10 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<meta charset="UTF-8" />
+	<meta charset="utf-8" />
 	<title>Monster Wants Candy</title>
+	<link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+	<meta name="description" content="Monster Wants Candy" />
 	<style> body { margin: 0; background: #B4D9E7; } </style>
 	<script src="src/phaser.min.js"></script>
 	<script src="src/Boot.js"></script>
@@ -11,8 +13,8 @@
 	<script src="src/Game.js"></script>
 </head>
 <body>
-<script type="text/javascript">
-(function () {
+<script>
+(function(){
 	var game = new Phaser.Game(640, 960, Phaser.CANVAS, 'game');
 	game.state.add('Boot', Candy.Boot);
 	game.state.add('Preloader', Candy.Preloader);
