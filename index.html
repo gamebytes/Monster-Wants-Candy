@@ -6,9 +6,11 @@
 	<link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
 	<meta name="description" content="Monster Wants Candy" />
 	<style> body { margin: 0; background: #B4D9E7; } </style>
+	<script src="src/storage.js"></script>
 	<script src="src/phaser.min.js"></script>
 	<script src="src/Boot.js"></script>
 	<script src="src/Preloader.js"></script>
+	<script src="src/StoryHowto.js"></script>
 	<script src="src/MainMenu.js"></script>
 	<script src="src/Game.js"></script>
 </head>
@@ -18,6 +20,7 @@
 	var game = new Phaser.Game(640, 960, Phaser.CANVAS, 'game');
 	game.state.add('Boot', Candy.Boot);
 	game.state.add('Preloader', Candy.Preloader);
+	game.state.add('StoryHowto', Candy.StoryHowto);
 	game.state.add('MainMenu', Candy.MainMenu);
 	game.state.add('Game', Candy.Game);
 	game.state.start('Boot');
