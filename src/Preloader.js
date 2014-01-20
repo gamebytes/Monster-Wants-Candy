@@ -12,7 +12,6 @@ Candy.Preloader.prototype = {
 		this.load.image('floor', 'img/floor.png');
 		this.load.image('monster-cover', 'img/monster-cover.png');
 		this.load.image('title', 'img/title.png');
-		this.load.image('gameover-message', 'img/gameover-message.png');
 		this.load.image('score-bg', 'img/score-bg.png');
 		this.load.image('highscore-text', 'img/highscore-text.png');
 		this.load.image('button-pause', 'img/button-pause.png');
@@ -22,6 +21,11 @@ Candy.Preloader.prototype = {
 		this.load.image('screen-pause', 'img/screen-pause.png');
 		this.load.image('screen-story', 'img/screen-story.png');
 		this.load.image('screen-howto', 'img/screen-howto.png');
+		this.load.image('screen-overlay', 'img/screen-overlay.png');
+		this.load.image('screen-achievements', 'img/screen-achievements.png');
+		this.load.image('text-paused', 'img/text-paused.png');
+		this.load.image('text-gameover', 'img/text-gameover.png');
+		this.load.image('text-newbestscore', 'img/text-newbestscore.png');
 
 		this.load.spritesheet('candy', 'img/candy.png', 82, 98);
 		this.load.spritesheet('hunger-meter', 'img/hunger-meter.png', 289, 45);
@@ -35,6 +39,7 @@ Candy.Preloader.prototype = {
 		this.load.spritesheet('button-continue', 'img/button-continue.png', 358, 133);
 		this.load.spritesheet('button-back', 'img/button-back.png', 358, 133);
 		this.load.spritesheet('button-restart', 'img/button-restart.png', 363, 131);
+		this.load.spritesheet('button-achievements', 'img/button-achievements.png', 182, 66);
 
 		// this.load.audio('sound1', ['audio/1-Shaker.wav']);
 	},
