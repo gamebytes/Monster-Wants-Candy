@@ -12,14 +12,25 @@ Candy.Game = function(game) {
 	candyUnlockLevels = [];
 	candyActualLevel = 0;
 	score = 0;
+	globalTimer = 0;
 	spawnCandyTimer = 0;
 	health = 0;
+	candyEnum = {
+		'red': 0,
+		'marshmallow': 1,
+		'jelly': 2,
+		'donut': 3,
+		'cupcake': 4,
+		'super': 5,
+		'bomb': 6
+	};
 };
 Candy.Game.prototype = {
 	create: function() {
 		gamePaused = false;
 		gameOver = false;
 		pauseButtonDisabled = false;
+		globalTimer = 0;
 		spawnCandyTimer = 0;
 		score = 0;
 		health = 0;
@@ -105,10 +116,21 @@ Candy.Game.prototype = {
 	},
 	clickCandy: function(candy) {
 		if(!gamePaused) {
-			score += (candy.type+1);
+			if(candy.type == candyEnum.bomb) { // bomb
+				gameOver = true;
+				// show proper message about boom?
+				console.log('bomb collected!');
+			}
+			else if(candy.type == candyEnum.super) { // super candy
+				score += 30;
+				// + some special effect?
+				console.log('super candy collected!');
+			}
+			else {
+				score += (candy.type+1);
+			}
 			console.log('added '+(candy.type+1)+' points');
 			scoreText.setText(score);
-			// accelerate to player
 			console.log('click!');
 			var eatTween = this.game.add.tween(candy);
 			eatTween.to({ x: 70, y: 820 }, 150, Phaser.Easing.Linear.None);
@@ -118,21 +140,46 @@ Candy.Game.prototype = {
 		}
 	},
 	spawnCandy: function() {
-		var dropPos = Math.floor(Math.random()*(640-98));
-		candy = this.add.button(dropPos, -98, 'candy', this.clickCandy, this);
-		candy.type = Math.floor(Math.random()*candyActualLevel);
-		console.log('candyType: '+candy.type);
+		// var spawnFrom = (Math.floor(Math.random()*2)) ? 'up' : 'down';
+		var spawnFrom = 'down';
 
+		if(spawnFrom == 'up') {
+			var dropPos = Math.floor(Math.random()*(640-98));
+			candy = this.add.button(dropPos, -98, 'candy', this.clickCandy, this);
+			candy.body.gravity.y = 3+(score/10);
+		}
+		else if(spawnFrom == 'down') {
+			// fruit ninja style
+			var launchPosition = Math.floor(Math.random()*2)*(640); // -98 // 0 or 542
+			candy = this.add.button(launchPosition, 960, 'candy', this.clickCandy, this);
+			var horizontalDirection = (launchPosition) ? -1 : 1;
+			var horizontalMovement = horizontalDirection*(Math.floor(Math.random()*200));
+			candy.body.velocity.x = horizontalMovement;
+			candy.body.velocity.y = -(Math.floor(Math.random()*250)+750); // 750-1000
+			candy.body.gravity.y = 10+(score/10);
+			console.log('launchPosition: '+launchPosition);
+			console.log('horizontalDirection: '+horizontalDirection);
+			console.log('horizontalMovement: '+horizontalMovement);
+		}
+		candy.type = Math.floor(Math.random()*candyActualLevel);
+		var randomizator = Math.floor(Math.random()*100);
+		if(randomizator == 13) { // 1% chance of having a super candy
+			candy.type = candyEnum.super;
+			console.log('super candy spawned!');
+		}
+		else if (randomizator > 90) { // 10% chance of having a bomb
+			candy.type = candyEnum.bomb;
+			console.log('bomb spawned!');
+		}
 		candy.animations.add('idle', [candy.type], 10, true).play();
 
 		candy.events.onOutOfBounds.add(this.resetCandy, this);
 		candy.anchor.setTo(0.5, 0.5);
-		candy.body.gravity.y = 3+(score/10);
-		candy.rotateMe = (Math.random()*4)-2;
+		candy.rotateMe = (Math.random()*8)-4;
 
 		candy.cachedVelocity = {};
-		candy.cachedVelocity.x = candy.body.velocity.x;
-		candy.cachedVelocity.y = candy.body.velocity.y;
+		// candy.cachedVelocity.x = candy.body.velocity.x;
+		// candy.cachedVelocity.y = candy.body.velocity.y;
 		candy.input.pixelPerfect = true;
 	    candyGroup.add(candy);
 	},
@@ -173,9 +220,16 @@ Candy.Game.prototype = {
 		}
 		else if(!gamePaused) {
 			spawnCandyTimer += this.game.time.elapsed;
-			if(spawnCandyTimer > (2000-score)) {
+			globalTimer += this.game.time.elapsed;
+			var numberOfCandy = Math.ceil(globalTimer/20000); // [zwieksz] number of candy after every 20 seconds
+			var numberOfSeconds = (2000-score)/Math.ceil(globalTimer/60000); // spawn candy x2 faster after every 60 seconds
+			if(spawnCandyTimer > numberOfSeconds) {
 				spawnCandyTimer = 0;
-				this.spawnCandy();
+				for(var i=0; i<numberOfCandy; i++) {
+					this.spawnCandy();
+				}
+				// spawn 2 candy or 2x faster
+				// this.spawnCandy();
 			}
 			// player.rotation = this.game.physics.accelerateToPointer(player, this.game.input.activePointer, 500, 500, 500);
 
@@ -234,7 +288,9 @@ Candy.Game.prototype = {
 	},
 	resetCandy: function(candy) {
 		candy.kill();
-		health -= 10;
+		if(candy.type != candyEnum.super && candy.type != candyEnum.bomb) {
+			health -= (candy.type+1);
+		}
 		hungerMeter.animations.play(''+health);
 	},
 	manageAudio: function() {
@@ -251,7 +307,7 @@ Candy.Game.prototype = {
 				// from cached gravity?
 				candy.body.gravity.y = 3+(score/10);
 			});
-			console.log('odkeszowujemy velocity');
+			console.log('uncache velocity');
 			player.animations.play('idle');
 		}
 		else if(status == 'off') {
@@ -262,7 +318,7 @@ Candy.Game.prototype = {
 				candy.body.velocity.y = 0;
 				candy.body.gravity.y = 0;
 			});
-			console.log('keszujemy velocity');
+			console.log('cache velocity');
 			player.animations.stop('idle');
 		}
 	},
