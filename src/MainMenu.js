@@ -13,8 +13,8 @@ Candy.MainMenu.prototype = {
 		this.game.add.sprite(640-194-50, 600, 'highscore-text');
 		this.game.add.sprite(640-213-40, 675, 'score-bg');
 
-		highscoreText = this.game.add.text(540, 690, "0", { font: "40px Arial", fill: "#FFCC00", align: "right" });
-		totalscoreText = this.game.add.text(90, 825, "0", { font: "28px Arial", fill: "#000", align: "right" });
+		highscoreText = this.game.add.text(540, 690, "0", { font: "40px ComicBook", fill: "#FFCC00", align: "right" });
+		totalscoreText = this.game.add.text(90, 825, "0", { font: "28px ComicBook", fill: "#000", align: "right" });
 
 		startButton = this.add.button(640-401-10, 960-143-10, 'button-start', function(){this.game.state.start('StoryHowto')}, this, 1, 0, 2);
 		achievementsButton = this.add.button(10, 960-66-15, 'button-achievements', function(){this.game.state.start('Achievements')}, this, 1, 0, 2);

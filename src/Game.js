@@ -93,7 +93,7 @@ Candy.Game.prototype = {
         }
 		hungerMeter.animations.play('25');
 
-		scoreText = this.game.add.text(120, 20, "0", { font: "40px Arial", fill: "#FFCC00", align: "right" });
+		scoreText = this.game.add.text(120, 20, "0", { font: "40px ComicBook", fill: "#FFCC00", align: "right" });
 		
 		candyGroup = this.game.add.group();
 		this.spawnCandy();
