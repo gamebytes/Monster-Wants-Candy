@@ -27,6 +27,11 @@ Candy.Preloader.prototype = {
 		this.load.image('text-gameover', 'img/text-gameover.png');
 		this.load.image('text-newbestscore', 'img/text-newbestscore.png');
 
+		this.load.text('font-ttf', 'fonts/comicbook.ttf');
+		this.load.text('font-svg', 'fonts/comicbook.svg');
+		this.load.text('font-ttf', 'fonts/comicbook.ttf');
+		this.load.text('font-woff', 'fonts/comicbook.woff');
+
 		this.load.spritesheet('candy', 'img/candy.png', 82, 98);
 		this.load.spritesheet('hunger-meter', 'img/hunger-meter.png', 289, 45);
 		this.load.spritesheet('monster-idle', 'img/monster-idle.png', 103, 131);
